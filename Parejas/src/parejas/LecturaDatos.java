@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,9 +17,7 @@ import java.util.logging.Logger;
  */
 
 public class LecturaDatos
-{
-    private StringTokenizer prueba;
-    
+{   
     //variables para los archivos
     private FileReader archivo1;
     private FileReader archivo2;
@@ -28,21 +27,41 @@ public class LecturaDatos
     private BufferedReader gestor2;
     
     //ruta de archivos
-    private final static String DIRECTORIO="/home/pablo/";
+    private final static String DIRECTORIO="/home/pablo/digiESFM-IPN/";
     private final static String ARCHIVO1="parejas1.txt";
     private final static String ARCHIVO2="parejas2.txt";
+
+    public FileReader getArchivo1()
+    {
+        return archivo1;
+    }
+
+    public FileReader getArchivo2()
+    {
+        return archivo2;
+    }
+
+    public BufferedReader getGestor1()
+    {
+        return gestor1;
+    }
+
+    public BufferedReader getGestor2()
+    {
+        return gestor2;
+    }
     
     public LecturaDatos()
-    {
-        prueba = new StringTokenizer(" ");
+    {  
         
         try
         {
-            archivo1=new FileReader(DIRECTORIO+ARCHIVO1);
-            archivo2=new FileReader(DIRECTORIO+ARCHIVO2);
+            archivo1 = new FileReader(DIRECTORIO+ARCHIVO1);
+            archivo2 = new FileReader(DIRECTORIO+ARCHIVO2);
             
             gestor1=new BufferedReader(archivo1);
             gestor2=new BufferedReader(archivo2);
+            
             System.out.println("Lectura exitosa");
         }
         catch (FileNotFoundException fex)
@@ -66,44 +85,85 @@ public class LecturaDatos
         gestor2.close();
     }
     
+    public ArrayList<Integer> numeros(BufferedReader gestor) throws IOException
+    {
+        ArrayList<Integer> lista=new ArrayList<Integer>();
+        boolean salir=false;
+        String aux="";
+        int auxiliar;
+        StringTokenizer espacio;
+        
+        while(!salir)
+        {
+            aux=gestor.readLine();
+            
+            if(aux!=null)
+            {
+                espacio = new StringTokenizer(aux);
+                
+                while(espacio.hasMoreElements())
+                {
+                    String d=(String) espacio.nextElement();
+                    
+                    auxiliar=Integer.valueOf(d);
+                    
+                    lista.add(auxiliar);
+                }
+                
+                //JOptionPane.showMessageDialog(null, lista.size());
+            }
+            else
+                salir=true;
+
+        }
+        
+        return lista;
+    }
+    
     @Override
     public String toString()
     {
         
-      String aux="",l="";
+      String aux="";
+      String l="";
+      boolean salir1=false;
+      boolean salir2=false;
       
       try
       {
             
-        while(true)//este ciclo while se usa para repetir el proceso de lectura, ya que se lee solo 1 linea de texto a la vez
+        while(!salir1)//este ciclo while se usa para repetir el proceso de lectura, ya que se lee solo 1 linea de texto a la vez
 	{
 	    aux=gestor1.readLine();
 	    //leemos una linea de texto y la guardamos en la variable auxiliar
 	    if(aux!=null)
                l+=aux+"\n";
 	    else
-	       break;
+	       salir1=true;
         }
         
         l+="\n \n";
         
-         while(true)//este ciclo while se usa para repetir el proceso de lectura, ya que se lee solo 1 linea de texto a la vez
+        while(!salir2)//este ciclo while se usa para repetir el proceso de lectura, ya que se lee solo 1 linea de texto a la vez
 	{
 	    aux=gestor2.readLine();
 	    //leemos una linea de texto y la guardamos en la variable auxiliar
 	    if(aux!=null)
                l+=aux+"\n";
 	    else
-	       break;
+	       salir2=true;
         }
       }
-      catch (IOException ex)
+      catch (IOException ioEx)
       {
-        Logger.getLogger(LecturaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(LecturaDatos.class.getName()).log(Level.SEVERE, null, ioEx);
+      }
+      catch (Exception ex)
+      {
+        Logger.getLogger(LecturaDatos.class.getName()).log(Level.SEVERE, null, ex);   
       }
         
         return l;
     }
-    
     
 }
