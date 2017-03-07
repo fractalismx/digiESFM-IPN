@@ -5,10 +5,7 @@
  */
 package parejas;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
@@ -16,48 +13,55 @@ import java.util.Iterator;
  */
 public class Principal
 {
-    final static int PAREJAS = 4;
+
+    public final static int PAREJAS = 15;
+
     /**
      * @param args the command line arguments
-     * @throws java.io.IOException
      */
-    public static void main(String args[]) throws IOException
+    public static void main(final String args[])
     {
-        LecturaDatos lectura = new LecturaDatos();
         
-        BufferedReader buffer1=lectura.getGestor1();
-        BufferedReader buffer2=lectura.getGestor2();
+        Persona hombres[] = null;
+        Persona mujeres[] = null;
         
-        ArrayList<Integer> prueba1= lectura.numeros(buffer1);
-        ArrayList<Integer> prueba2= lectura.numeros(buffer2);
+        for (int i=0;i<PAREJAS;i++)
+        {
+            hombres[i]=new Persona(PAREJAS);
+            mujeres[i]=new Persona(PAREJAS);
+        }
         
-        lectura.destructorLecturaDatos();
+        while()
+        {
+            
+        }
         
-        int matrizHombres[][]=new int[PAREJAS][PAREJAS];
-        int matrizMujeres[][]=new int[PAREJAS][PAREJAS];
-         
-        int k=0;
-         
-             for(int i=0;i<PAREJAS;i++)
-             {
-                 for(int j=0;j<PAREJAS;j++)
-                 {
-                        matrizHombres[i][j]=prueba1.get(k);
-                        k++;
-                 } 
-             }
-         
-             k=0;
-             
-             for(int i=0;i<PAREJAS;i++)
-             {
-                 for(int j=0;j<PAREJAS;j++)
-                 {
-                    matrizMujeres[i][j]=prueba2.get(k);
-                    k++;
-                 }
-             }
-         
     }
-    
+
+    //Codigo Lectura desde archivo
+    /*
+     * LecturaDatos lectura = new LecturaDatos();
+     *
+     * BufferedReader buffer1=lectura.getGestor1(); BufferedReader
+     * buffer2=lectura.getGestor2();
+     *
+     * ArrayList<Integer> prueba1= lectura.numeros(buffer1); ArrayList<Integer>
+     * prueba2= lectura.numeros(buffer2);
+     *
+     * lectura.destructorLecturaDatos();
+     *
+     * int matrizHombres[][]=new int[PAREJAS][PAREJAS]; int
+     * matrizMujeres[][]=new int[PAREJAS][PAREJAS];
+     *
+     * int k=0;
+     *
+     * for(int i=0;i<PAREJAS;i++) { for(int j=0;j<PAREJAS;j++) {
+     * matrizHombres[i][j]=prueba1.get(k); k++; } }
+     *
+     * k=0;
+     *
+     * for(int i=0;i<PAREJAS;i++) { for(int j=0;j<PAREJAS;j++) {
+     * matrizMujeres[i][j]=prueba2.get(k); k++; }
+             }
+     */
 }
