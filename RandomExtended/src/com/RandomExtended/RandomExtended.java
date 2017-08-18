@@ -54,7 +54,7 @@ public class RandomExtended extends Random
         while (suma <= u)
         {
             suma += auxiliarProbability;
-            auxiliarProbability *= (n - i) / (i - 1) * (probability / (1 - probability));
+            auxiliarProbability *=  probability
             i++;
         }
 
