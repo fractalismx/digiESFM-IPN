@@ -62,6 +62,9 @@ public class EscrituraDatos
             {
                 tiempo=i + j/Principal.PASOS;
                 valorInicialNormal += Principal.MEDIA*tiempo+Principal.DESVIACIONSTD*wiener.numeroWiener(tiempo,aleat);
+                
+                if(valorInicialNormal<0)
+					valorInicialNormal=0;
 
                 escribirArchivo.print(tiempo + "," + valorInicialNormal + "\n");
             }
@@ -87,6 +90,9 @@ public class EscrituraDatos
             {
                tiempo=i + j/Principal.PASOS;
                valorInicialNormal += wiener.numeroWiener(tiempo,aleat);
+               
+               if(valorInicialNormal<0)
+					valorInicialNormal=0;
 
                escribirArchivo.print(tiempo + "," + valorInicialNormal + "\n");
             }
@@ -114,6 +120,10 @@ public class EscrituraDatos
         for (int i = 0; i < Principal.REPETICIONES; i++)
         {
             valorInicial += aleat.nextGenerator(listaI, listaD);
+            
+            if(valorInicial<0)
+					valorInicial=0;
+            
             escribirArchivo.print(String.valueOf(i + 1) + "," + String.valueOf(valorInicial) + "\n");
         }
 

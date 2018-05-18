@@ -38,6 +38,7 @@ public class RandomExtended extends Random
         while (suma <= u)
         {
             suma += listProbability.get(i);
+            i++;
         }
 
         return listNumbers.get(i);
